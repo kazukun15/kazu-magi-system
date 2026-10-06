@@ -11,7 +11,9 @@
     "test:server": "node --test tests/server.test.mjs tests/github.test.mjs",
     "magi:decide": "node scripts/github-decide.mjs",
     "test:local": "npm run build && node tests/local.test.mjs",
-    "start": "node scripts/local-dev.mjs --production"
+    "start": "node scripts/local-dev.mjs --production",
+    "build:site": "node scripts/build-hosted.mjs",
+    "test:site": "npm run build:site && node --test tests/server.test.mjs tests/hosted.test.mjs"
   },
   "dependencies": {
     "react": "^19.1.0",

@@ -175,3 +175,8 @@ The inherited implementation already has a local server and encrypted local API-
 input → same external model called for 3 role prompts → same model called again for consensus
 
 This is **not yet the full target architecture**. Priority work is to add a genuine Context Engine, provider abstraction including local AI, independent core policies, weighted consensus, memory, and offline/rule fallbacks while keeping the existing UI stable.
+
+## User-authorized hosted website (2026-10-06)
+Kazu explicitly requested a usable website. The server/hosted.js and
+scripts/build-hosted.mjs deployment layer is authorized. Keep local development
+and GitHub Actions intact. Site runtime secrets must never enter Git or assets.

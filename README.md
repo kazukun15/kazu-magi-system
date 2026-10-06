@@ -159,3 +159,17 @@ GitHubの非公開リポジトリ [kazukun15/kazu-magi-system](https://github.co
 [Build and test](https://github.com/kazukun15/kazu-magi-system/actions/runs/37443732856) と
 [MAGI DecisionのMock実行](https://github.com/kazukun15/kazu-magi-system/actions/runs/37443858370) がGitHub上でも成功しました。
 実APIキーは未登録で、実AI接続は未確認です。[Secrets設定](https://github.com/kazukun15/kazu-magi-system/settings/secrets/actions) に `MAGI_API_KEY` を登録して使用してください。
+
+## サイト版（2026-10-06）
+
+[ブラウザーでMAGIを開く](https://kazu-magi-system.kazkun.chatgpt.site)
+
+Sitesへのサイト版v2のデプロイが成功しました。現在の閲覧範囲は本人のみです。
+サイトの「設定」または「AI設定」からAPIキーを登録できます。サインインした
+利用者ごとにサーバー側で暗号化保存し、ブラウザーへの再表示はしません。
+GitHub ActionsのMAGI_API_KEYとは別の設定です。実AIの接続はキー登録後に
+接続テストで確認してください。
+
+ローカル起動とGitHub Actionsは従来どおりです。サイト用Workerのビルドは
+`npm run build:site`、保護・暗号化・ユーザー分離の検証は`npm run test:site`。
+サイトの秘密環境変数MAGI_VAULT_KEYはGitに含めず、Sites側で管理します。
