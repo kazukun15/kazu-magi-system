@@ -1,0 +1,60 @@
+name: MAGI Decision
+
+on:
+  workflow_dispatch:
+    inputs:
+      question:
+        description: '相談内容（1〜5000文字。機密情報は入力しない）'
+        required: true
+        type: string
+      provider:
+        description: 'AIプロバイダー（mockはAPI不要の動作確認）'
+        required: true
+        default: mock
+        type: choice
+        options: [mock, gemini, openai, deepseek, groq, openrouter]
+      model:
+        description: 'モデル名（空欄なら既存の既定値）'
+        required: false
+        type: string
+      category:
+        description: 'カテゴリ（技術 / デザイン / 日常など）'
+        required: false
+        type: string
+      values:
+        description: '重視する条件（1000文字まで）'
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  decide:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+      # No build and no dependency installation run with an API secret.
+      # Inputs are passed as environment data, never interpolated into shell code.
+      - name: Run MAGI
+        run: node scripts/github-decide.mjs
+        env:
+          MAGI_API_KEY: ${{ secrets.MAGI_API_KEY }}
+          MAGI_PROVIDER: ${{ inputs.provider }}
+          MAGI_MODEL: ${{ inputs.model }}
+          MAGI_QUESTION: ${{ inputs.question }}
+          MAGI_CATEGORY: ${{ inputs.category }}
+          MAGI_VALUES: ${{ inputs.values }}
+      - name: Downloadable decision
+        uses: actions/upload-artifact@v4
+        with:
+          name: magi-decision-${{ github.run_id }}-${{ github.run_attempt }}
+          path: magi-results/
+          retention-days: 7
+          if-no-files-found: error

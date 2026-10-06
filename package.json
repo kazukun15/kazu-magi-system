@@ -1,0 +1,25 @@
+{
+  "name": "kazu-magi-system",
+  "version": "1.2.0-github",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/local-dev.mjs",
+    "build": "vite build",
+    "preview": "node scripts/local-dev.mjs --production",
+    "test": "npm run build && node scripts/test-all.mjs",
+    "test:server": "node --test tests/server.test.mjs tests/github.test.mjs",
+    "magi:decide": "node scripts/github-decide.mjs",
+    "test:local": "npm run build && node tests/local.test.mjs",
+    "start": "node scripts/local-dev.mjs --production"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "lucide-react": "^0.468.0"
+  },
+  "devDependencies": {
+    "vite": "^6.3.5",
+    "@playwright/test": "^1.51.1"
+  }
+}
