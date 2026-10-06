@@ -155,4 +155,7 @@ npm test
 
 既存の本番サーバーでトップページが404になるパス判定も修正しました。
 Node 24ではfetchのHost上書きが反映されないため、Host検証テストは実HTTPリクエストへ変更しています。
-実際のGitHub Actions実行・実APIキーによる接続・GitHubへのアップロードは未実施です。
+GitHubの非公開リポジトリ [kazukun15/kazu-magi-system](https://github.com/kazukun15/kazu-magi-system) のmainへアップロード済みです。
+[Build and test](https://github.com/kazukun15/kazu-magi-system/actions/runs/37443732856) と
+[MAGI DecisionのMock実行](https://github.com/kazukun15/kazu-magi-system/actions/runs/37443858370) がGitHub上でも成功しました。
+実APIキーは未登録で、実AI接続は未確認です。[Secrets設定](https://github.com/kazukun15/kazu-magi-system/settings/secrets/actions) に `MAGI_API_KEY` を登録して使用してください。
